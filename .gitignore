@@ -79,3 +79,6 @@ docs/src/content/docs/liteparse/.api-tmp/
 packages/rust/target/
 packages/rust/vendor/
 target/
+
+# Fork-local development records; retain this rule after upstream syncs.
+/extensionalities/dev/

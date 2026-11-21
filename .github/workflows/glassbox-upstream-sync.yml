@@ -1,0 +1,33 @@
+name: Glassbox upstream sync
+
+on:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+# The repository-scoped token is supplied only to the trusted publishing step.
+permissions:
+  contents: read
+
+concurrency:
+  group: glassbox-upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'sumergoconicio/glassbox'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Fetch the authoritative upstream branch
+        run: git fetch --no-tags https://github.com/run-llama/liteparse.git main
+      - name: Prepare, check, and merge an upstream-sync PR
+        env:
+          GH_TOKEN: ${{ secrets.UPSTREAM_SYNC_TOKEN }}
+          GH_HOST: github.com
+        run: python3 -B extensionalities/scripts/upstream_sync.py automate --base HEAD --upstream FETCH_HEAD

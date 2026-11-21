@@ -1,0 +1,65 @@
+{
+  "unicode_version": "15.0.0",
+  "samples": [
+    {
+      "text": "",
+      "score": 0
+    },
+    {
+      "text": "short",
+      "score": 0
+    },
+    {
+      "text": "alpha beta gamma",
+      "score": 0
+    },
+    {
+      "text": "Alpha beta gamma.",
+      "score": 0.10388888888888889
+    },
+    {
+      "text": "We can inspect the original source and verify the evidence in this answer.",
+      "score": 0.7305128205128205
+    },
+    {
+      "text": "This is another native note about the source and its evidence.",
+      "score": 0.62
+    },
+    {
+      "text": "if (x == y) { return a; }",
+      "score": 0
+    },
+    {
+      "text": "the and of",
+      "score": 0
+    },
+    {
+      "text": "  This is a sentence.  ",
+      "score": 0.26125
+    },
+    {
+      "text": "Étude précise demeure.",
+      "score": 0.1466666666666667
+    },
+    {
+      "text": "École régionale ferme.",
+      "score": 0
+    },
+    {
+      "text": "Ⅳ alpha beta.",
+      "score": 0
+    },
+    {
+      "text": "中文 文本 测试。",
+      "score": 0
+    },
+    {
+      "text": "Alphabeta gamma.",
+      "score": 0.12222222222222223
+    },
+    {
+      "text": "“the” unquoted words.",
+      "score": 0
+    }
+  ]
+}

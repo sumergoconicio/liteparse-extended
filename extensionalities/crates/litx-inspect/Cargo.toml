@@ -1,0 +1,42 @@
+[package]
+name = "litx-inspect"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+publish = false
+description = "Offline, bounded file identification and native Quick Look inspection"
+
+[features]
+default = ["parquet-preview"]
+# Compatibility feature name only; row extraction is deferred and unregistered.
+parquet-preview = []
+magika = ["dep:magika", "dep:ort"]
+ffmpeg-link = ["dep:ffmpeg-next"]
+
+[dependencies]
+magika = { version = "1.1", optional = true }
+# Dynamic loading only, no native build cache or runtime binary download.
+ort = { version = "=2.0.0-rc.12", default-features = false, features = ["load-dynamic", "api-24"], optional = true }
+ffmpeg-next = { version = "9.1", default-features = false, features = ["format"], optional = true }
+file-format = { version = "0.29", features = ["reader"] }
+zip = { version = "9.6", default-features = false, features = ["deflate"] }
+quick-xml = "0.42"
+image = { version = "0.25", default-features = false, features = ["default-formats"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+encoding_rs = "0.8"
+crc32fast = "1"
+percent-encoding = "2"
+parquet-format-safe = { version = "=0.2.4", default-features = false }
+csv = "1.4"
+tesseract-rs = "0.2"
+tokio = { version = "1", features = ["rt"] }
+# Match the inspected Go scorer's Unicode 15 letter and uppercase categories.
+unicode-general-category = "=0.6.0"
+liteparse = { path = "../../../crates/liteparse", features = ["tesseract"] }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+# Test fixture writers only; no Parquet decoder is linked into runtime builds.
+parquet-reader = { package = "parquet", version = "=57.3.1", default-features = false, features = ["json", "snap", "lz4"] }
+bytes = { version = "1" }
